@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS issues (
 ## ⚙️ Setup Steps
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/rootx155/DevPlus-Assignment
 cd DevPulse
 ```
 
