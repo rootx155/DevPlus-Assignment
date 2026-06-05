@@ -6,7 +6,7 @@ A collaborative platform for software teams to report bugs, suggest features, an
 
 ## 🚀 Live Details
 
-- **Live URL:** [https://your-deployed-app.com](https://your-deployed-app.com)
+- **Live URL:** [https://dev-pulse-sigma-nine.vercel.app](https://dev-pulse-sigma-nine.vercel.app)
 - **Database:** NeonDB (PostgreSQL)
 
 ---
