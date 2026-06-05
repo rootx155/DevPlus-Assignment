@@ -2,10 +2,10 @@ import { pool } from "../../db/index.js";
 import type { ICreateIssue, IIssueFilter } from "./issues.interface.js";
 
 const createIssueInDB = async (payload: ICreateIssue, reporterId: number) => {
-  console.log(
-    `Inserting issue into DB for reporter ID: ${reporterId}`,
-    payload,
-  );
+  // console.log(
+  //   `Inserting issue into DB for reporter ID: ${reporterId}`,
+  //   payload,
+  // );
   const { title, description, type, status } = payload;
 
   if (!description || description.length < 20) {
@@ -19,12 +19,12 @@ const createIssueInDB = async (payload: ICreateIssue, reporterId: number) => {
     [title, description, type, status, reporterId],
   );
 
-  console.log("Issue generated successfully:", result.rows[0]);
+  // console.log("Issue generated successfully:", result.rows[0]);
   return result.rows[0];
 };
 
 const getAllIssuesFromDB = async (filters: IIssueFilter) => {
-  console.log("Fetching issues with filter payload:", filters);
+  // console.log("Fetching issues with filter payload:", filters);
   const { sort = "newest", type, status } = filters;
 
   let queryText = "SELECT * FROM issues";
@@ -58,7 +58,7 @@ const getAllIssuesFromDB = async (filters: IIssueFilter) => {
 
   // EXPLICIT REQUIREMENT HINT: Match reporter data manually WITHOUT using JOINs
   const userIds = Array.from(new Set(issues.map((issue) => issue.reporter_id)));
-  console.log("Staging lookups sequentially for associated User IDs:", userIds);
+  //  console.log("Staging lookups sequentially for associated User IDs:", userIds);
 
   const usersResult = await pool.query(
     `SELECT id, name, role FROM users WHERE id = ANY($1)`,
@@ -81,7 +81,7 @@ const getAllIssuesFromDB = async (filters: IIssueFilter) => {
 };
 
 const getSingleIssueFromDB = async (id: number) => {
-  console.log(`Locating singular issue profile matching ID: ${id}`);
+  // console.log(`Locating singular issue profile matching ID: ${id}`);
   const issueResult = await pool.query("SELECT * FROM issues WHERE id = $1", [
     id,
   ]);
@@ -110,9 +110,9 @@ const updateIssueInDB = async (
   userId: number,
   userRole: string,
 ) => {
-  console.log(
-    `Update execution triggered on Issue ID: ${id} by User ID: ${userId} [${userRole}]`,
-  );
+  // console.log(
+  //   `Update execution triggered on Issue ID: ${id} by User ID: ${userId} [${userRole}]`,
+  // );
 
   const currentIssueResult = await pool.query(
     "SELECT * FROM issues WHERE id = $1",
@@ -156,7 +156,7 @@ const updateIssueInDB = async (
 };
 
 const deleteIssueFromDB = async (id: number) => {
-  console.log(`Delete operation executed on Issue ID: ${id}`);
+  // console.log(`Delete operation executed on Issue ID: ${id}`);
   const checkResult = await pool.query("SELECT * FROM issues WHERE id = $1", [
     id,
   ]);
