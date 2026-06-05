@@ -8,6 +8,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Server is running");
+});
+
 // Main App Routes Mapping
 app.use("/api/auth", authRouter);
 app.use("/api/issues", issuesRouter);
