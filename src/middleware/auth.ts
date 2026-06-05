@@ -17,7 +17,7 @@ export const authenticate = async (
   res: Response,
   next: NextFunction,
 ) => {
-  console.log(req.user);
+  // console.log(req.user);
 
   const authHeader = req.headers.authorization;
   if (!authHeader) {
@@ -27,14 +27,14 @@ export const authenticate = async (
 
   try {
     const decoded = jwt.verify(authHeader, config.jwtSecretKey) as JwtPayload;
-    console.log("Decoded JWT Payload:", decoded);
+    // console.log("Decoded JWT Payload:", decoded);
 
     const userData = await pool.query("SELECT * FROM users WHERE email = $1", [
       decoded.email,
     ]);
 
     req.user = userData.rows[0];
-    console.log("Authenticated User:", req.user);
+    // console.log("Authenticated User:", req.user);
     next();
   } catch (error) {
     sendError(res, 401, "Unauthorized", "Invalid or expired token");

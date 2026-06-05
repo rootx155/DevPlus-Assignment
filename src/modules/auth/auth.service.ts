@@ -5,7 +5,7 @@ import { config } from "../../config/index.js";
 import type { ICreateUser, ILoginUser } from "./auth.interface.js";
 
 const createUserIntoDB = async (payload: ICreateUser) => {
-  console.log("Creating user in DB with payload:", payload);
+  //console.log("Creating user in DB with payload:", payload);
   const { name, email, password, role } = payload;
 
   // Salt rounds between 8 and 12
@@ -15,7 +15,7 @@ const createUserIntoDB = async (payload: ICreateUser) => {
     [name, email, hashPassword, role],
   );
 
-  console.log("User created in DB successfully");
+  // console.log("User created in DB successfully");
   const user = result.rows[0];
   delete user.password;
   return user;
@@ -38,7 +38,7 @@ const loginUserFromDB = async (payload: ILoginUser) => {
   if (!isPasswordValid) {
     throw new Error("Invalid password");
   }
-  console.log("USER LOGIN", user);
+  //console.log("USER LOGIN", user);
 
   // Hint requirement: Include user's id, name, and role in token payload
   const jwtPayload = {

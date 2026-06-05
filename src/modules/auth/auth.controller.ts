@@ -3,7 +3,7 @@ import { authService } from "./auth.service.js";
 import { sendSuccess, sendError } from "../../utils/response.js";
 
 const registerUser = async (req: Request, res: Response) => {
-  console.log("[POST /api/auth/signup] Body:", req.body);
+  // console.log("[POST /api/auth/signup] Body:", req.body);
   try {
     const result = await authService.createUserIntoDB(req.body);
     return sendSuccess(res, 201, "User registered successfully", result);
@@ -17,7 +17,7 @@ const registerUser = async (req: Request, res: Response) => {
 };
 
 const loginUser = async (req: Request, res: Response) => {
-  console.log("[POST /api/auth/login] Body:", req.body);
+  // console.log("[POST /api/auth/login] Body:", req.body);
   try {
     const result = await authService.loginUserFromDB(req.body);
     return sendSuccess(res, 200, "Login successful", result);
